@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import {
   Search,
   Mail,
@@ -16,11 +17,41 @@ import logo5 from "../assets/logo5.webp";
 import logo6 from "../assets/logo6.webp";
 
 const JobsListing = () => {
+  const [range, setRange] = useState(50);
+  const [amount, setAmount] = useState(1200);
   const experienceOptions = [
     { label: "> 5 years", count: 1 },
     { label: "< 1 year", count: 5 },
     { label: "1-3 years", count: 10 },
     { label: "3-5 years", count: 4 },
+  ];
+
+  const typeOptions = [
+    { label: "Contract", count: 0 },
+    { label: "Freelancer", count: 3 },
+    { label: "Full Time", count: 13 },
+    { label: "Internship", count: 1 },
+    { label: "Part Tome", count: 2 },
+    { label: "Remote", count: 2 },
+    { label: "Temporary", count: 2 },
+  ];
+
+  const levelOption = [
+    { label: "Junior", count: 1 },
+    { label: "Manager", count: 6 },
+    { label: "Professional", count: 3 },
+    { label: "Senior", count: 3 },
+  ];
+
+  const skills = [
+    "Account Manager",
+    "Administrative",
+    "Android",
+    "Angular",
+    "app",
+    "ASP.NET",
+    "Automative",
+    "Banner",
   ];
 
   const jobs = [
@@ -96,6 +127,42 @@ const JobsListing = () => {
       featured: true,
       tags: ["app", "ios"],
     },
+    {
+      id: 7,
+      title: "Chief Accountant",
+      company: "Shippo Company",
+      logo: logo1,
+      salary: "$500 - $1,000 / month",
+      location: "Hanoi, Hanoi",
+      timeAgo: "8 months ago",
+      type: "FULL TIME",
+      featured: true,
+      tags: ["Android", "app", "ReactJs", "Ruby"],
+    },
+    {
+      id: 8,
+      title: "Senior Data Engineer",
+      company: "Radio Game",
+      logo: logo2,
+      salary: "$500 - $1,000 / month",
+      location: "Chicago, Illinois",
+      timeAgo: "8 months ago",
+      type: "PART TIME",
+      featured: true,
+      tags: ["CSS", "PHP", "WordPress"],
+    },
+    {
+      id: 3,
+      title: "Construction Worker",
+      company: "Digital Vine",
+      logo: logo3,
+      salary: "$500 - $1000 / month",
+      location: "Chicago, Illinois",
+      timeAgo: "8 months ago",
+      type: "REMOTE",
+      featured: false,
+      tags: ["Angular", "ASP.NET, Banner, C++"],
+    },
   ];
 
   return (
@@ -119,7 +186,7 @@ const JobsListing = () => {
                   <input
                     type="text"
                     placeholder="Search..."
-                    className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg"
+                    className="w-full outline-none pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg"
                   />
                 </div>
                 <button className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-lg">
@@ -132,7 +199,7 @@ const JobsListing = () => {
               <h3 className="text-lg font-semibold text-gray-900 mb-4">
                 Experience
               </h3>
-              <div className="space-y-3">
+              <div>
                 {experienceOptions.map((option, index) => (
                   <label
                     key={index}
@@ -154,11 +221,101 @@ const JobsListing = () => {
                 <input
                   type="text"
                   placeholder="Enter location"
-                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg pr-10"
+                  className="w-full outline-none px-4 py-2.5 border border-gray-300 rounded-lg pr-10"
                 />
                 <button className="absolute right-3 top-2.5 text-gray-400">
                   <MapPin className="h-5 w-5" />
                 </button>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg p-6 space-y-2 shadow-sm border border-gray-200">
+              <h3 className="space-x-2">
+                <span className="text-zinc-700">Radius:</span>
+                <span>{range} KM</span>
+              </h3>
+              <input
+                value={range}
+                onChange={(e) => setRange(Number(e.target.value))}
+                max={700}
+                type="range"
+                className="w-4/5 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-green"
+                style={{
+                  background: `linear-gradient(to right, #1dae0e 0%, #1dae0e ${
+                    (range / 700) * 100
+                  }%, #e5e7eb ${(range / 700) * 100}%, #e5e7eb 100%)`,
+                }}
+              />
+            </div>
+
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">
+                Salaries
+              </h2>
+              <input
+                value={amount}
+                onChange={(e) => setAmount(Number(e.target.value))}
+                max={100000}
+                type="range"
+                className="w-4/5 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-green"
+                style={{
+                  background: `linear-gradient(to right, #1dae0e 0%, #1dae0e ${
+                    (amount / 300000) * 100
+                  }%, #e5e7eb ${(amount / 300000) * 100}%, #e5e7eb 100%)`,
+                }}
+              />
+              <h3 className="space-x-2 mt-2">
+                <span className="text-zinc-700">Salary Range: </span>
+                <span>$0 - ${amount}</span>
+              </h3>
+            </div>
+
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Type</h3>
+              <div>
+                {typeOptions.map((option, index) => (
+                  <label
+                    key={index}
+                    className="flex items-center cursor-pointer p-2 rounded-md">
+                    <input type="checkbox" className="h-4 w-4" />
+                    <span className="ml-3 text-sm text-gray-700">
+                      {option.label} ({option.count})
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                Level
+              </h3>
+              <div>
+                {levelOption.map((option, index) => (
+                  <label
+                    key={index}
+                    className="flex items-center cursor-pointer p-2 rounded-md">
+                    <input type="checkbox" className="h-4 w-4" />
+                    <span className="ml-3 text-sm text-gray-700">
+                      {option.label} ({option.count})
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                Skills
+              </h3>
+              <div className="flex flex-wrap gap-1">
+                {skills.map((skill, index) => (
+                  <span
+                    className="px-3 py-1.5 rounded-full  text-sm text-zinc-600 bg-[#eff1f8] mx-2 flex flex-wrap"
+                    key={index}>
+                    {skill}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
@@ -195,7 +352,6 @@ const JobsListing = () => {
                 </div>
               </div>
             </div>
-
             <div className="space-y-5">
               {jobs.map((job) => (
                 <div
@@ -264,9 +420,23 @@ const JobsListing = () => {
               ))}
             </div>
 
-            <div className="flex justify-center mt-8">
-              <button className="bg-white border-2 border-green-500 text-green-600 font-semibold px-8 py-3 rounded-lg hover:bg-green-500 hover:text-white transition">
-                Load More Jobs
+            <div className="flex items-center justify-center my-10 space-x-2">
+              <button className="p-2 cursor-pointer hover:bg-green-500 rounded-full border border-gray-300">
+                <FiChevronLeft />
+              </button>
+
+              <button className="px-4 cursor-pointer hover:bg-green-500 py-2 rounded-md bg-green-500 text-white ">
+                1
+              </button>
+              <button className="px-4 cursor-pointer hover:bg-green-500 py-2 rounded-md bg-white text-gray-700 border border-gray-300">
+                2
+              </button>
+              <button className="px-4 cursor-pointer hover:bg-green-500 py-2 rounded-md bg-white text-gray-700 border border-gray-300">
+                3
+              </button>
+
+              <button className="p-2 cursor-pointer hover:bg-green-500 rounded-full border border-gray-300">
+                <FiChevronRight />
               </button>
             </div>
           </div>
