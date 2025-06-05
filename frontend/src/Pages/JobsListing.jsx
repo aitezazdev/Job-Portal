@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import {
   Search,
   Mail,
@@ -15,10 +15,23 @@ import logo3 from "../assets/logo3.webp";
 import logo4 from "../assets/logo4.webp";
 import logo5 from "../assets/logo5.webp";
 import logo6 from "../assets/logo6.webp";
+import imageList1 from "../assets/jobsList/cover-image-employer-2.webp";
+import imageList2 from "../assets/jobsList/cover-image-employer-3.webp";
+import imageList3 from "../assets/jobsList/cover-image-employer-4.webp";
 
 const JobsListing = () => {
   const [range, setRange] = useState(50);
   const [amount, setAmount] = useState(1200);
+  const [current, setCurrent] = useState(0);
+
+  const navigate = (dir) => {
+    setCurrent((prev) =>
+      dir === "prev"
+        ? (prev - 1 + imageSlider.length) % imageSlider.length
+        : (prev + 1) % imageSlider.length
+    );
+  };
+
   const experienceOptions = [
     { label: "> 5 years", count: 1 },
     { label: "< 1 year", count: 5 },
@@ -41,6 +54,36 @@ const JobsListing = () => {
     { label: "Manager", count: 6 },
     { label: "Professional", count: 3 },
     { label: "Senior", count: 3 },
+  ];
+
+  const imageSlider = [
+    {
+      id: 1,
+      image: imageList1,
+      shortImage: logo1,
+      company: "Inwave Studio",
+      stars: 5,
+      location: "Chicago, IL, USA",
+      jobs: "2 Jobs",
+    },
+    {
+      id: 2,
+      image: imageList2,
+      shortImage: logo2,
+      company: "Vsmarttech",
+      stars: 5,
+      location: "London, Euston, London, UK",
+      jobs: "1 Jobs",
+    },
+    {
+      id: 3,
+      image: imageList3,
+      shortImage: logo3,
+      company: "Digital Asset",
+      stars: 5,
+      location: "Beijing, China",
+      jobs: "1 Jobs",
+    },
   ];
 
   const skills = [
@@ -152,7 +195,7 @@ const JobsListing = () => {
       tags: ["CSS", "PHP", "WordPress"],
     },
     {
-      id: 3,
+      id: 9,
       title: "Construction Worker",
       company: "Digital Vine",
       logo: logo3,
@@ -162,6 +205,18 @@ const JobsListing = () => {
       type: "REMOTE",
       featured: false,
       tags: ["Angular", "ASP.NET, Banner, C++"],
+    },
+    {
+      id: 10,
+      title: "IOS Developer",
+      company: "InwaveThemes",
+      logo: logo6,
+      salary: "$500 - $1000 / month",
+      location: "FULL TIME",
+      timeAgo: "8 month ago",
+      type: "FULL TIME",
+      featured: true,
+      tags: ["app", "ios"],
     },
   ];
 
@@ -260,7 +315,7 @@ const JobsListing = () => {
                 className="w-4/5 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-green"
                 style={{
                   background: `linear-gradient(to right, #1dae0e 0%, #1dae0e ${
-                    (amount / 300000) * 100
+                    (amount / 100000) * 100
                   }%, #e5e7eb ${(amount / 300000) * 100}%, #e5e7eb 100%)`,
                 }}
               />
@@ -316,6 +371,59 @@ const JobsListing = () => {
                     {skill}
                   </span>
                 ))}
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
+                Company Spotlight
+              </h3>
+
+              <div className="relative w-full h-64 overflow-hidden rounded-lg">
+                <div
+                  className="flex transition-transform duration-500 ease-in-out"
+                  style={{ transform: `translateX(-${current * 100}%)` }}>
+                  {imageSlider.map((item, index) => (
+                    <img
+                      key={index}
+                      src={item.image}
+                      alt={`slide-${index}`}
+                      className="w-full h-64 object-cover flex-shrink-0 rounded-lg"
+                    />
+                  ))}
+                </div>
+
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-20 h-20">
+                  <img
+                    src={imageSlider[current].shortImage}
+                    alt="logo"
+                    className="rounded border-4 border-white shadow-md w-full h-full object-contain"
+                  />
+                </div>
+
+                <button
+                  onClick={() => navigate("prev")}
+                  className="absolute top-1/2 cursor-pointer left-4 transform -translate-y-1/2 text-4xl text-white bg-black/40 hover:bg-black/70 p-2 rounded-full transition">
+                  {"<"}
+                </button>
+                <button
+                  onClick={() => navigate("next")}
+                  className="absolute top-1/2 cursor-pointer right-4 transform -translate-y-1/2 text-4xl text-white bg-black/40 hover:bg-black/70 p-2 rounded-full transition">
+                  {">"}
+                </button>
+              </div>
+
+              <div className="mt-6 p-4 flex flex-col justify-center items-center space-y-2 rounded-lg bg-gray-50 border border-gray-100">
+                <h4 className="text-xl font-bold text-gray-800">
+                  {imageSlider[current].company}
+                </h4>
+                <div className="flex items-center text-yellow-500 text-sm mt-1">
+                  ⭐⭐⭐⭐⭐
+                </div>
+                <p className=" mt-1">{imageSlider[current].location}</p>
+                <p className="text-green-600 font-semibold mt-1">
+                  {imageSlider[current].jobs}
+                </p>
               </div>
             </div>
           </div>
