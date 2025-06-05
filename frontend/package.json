@@ -21,7 +21,7 @@
     "react-loaders": "^3.0.1",
     "react-range": "^1.10.0",
     "react-redux": "^9.2.0",
-    "react-router-dom": "^7.4.0",
+    "react-router-dom": "^7.6.2",
     "react-toastify": "^11.0.5",
     "recharts": "^2.15.1",
     "tailwindcss": "^4.0.17"
