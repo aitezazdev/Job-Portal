@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Search, MapPin } from 'lucide-react';
-import brand1 from '../assets/brand-1.webp';
-import brand2 from '../assets/brand-2.webp';
-import brand3 from '../assets/brand-3.webp';
-import brand4 from '../assets/brand-4.webp';
-import brand5 from '../assets/brand-5.webp';
-import brand6 from '../assets/brand-6.webp';
+import brand1 from '../assets/Home/brand-1.webp';
+import brand2 from '../assets/Home/brand-2.webp';
+import brand3 from '../assets/Home/brand-3.webp';
+import brand4 from '../assets/Home/brand-4.webp';
+import brand5 from '../assets/Home/brand-5.webp';
+import brand6 from '../assets/Home/brand-6.webp';
 
 const Home = () => {
   const [jobQuery, setJobQuery] = useState('');

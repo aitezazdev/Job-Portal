@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import {
   Search,
   Mail,
@@ -9,12 +10,12 @@ import {
   Grid3X3,
   List,
 } from "lucide-react";
-import logo1 from "../assets/logo1.webp";
-import logo2 from "../assets/logo2.webp";
-import logo3 from "../assets/logo3.webp";
-import logo4 from "../assets/logo4.webp";
-import logo5 from "../assets/logo5.webp";
-import logo6 from "../assets/logo6.webp";
+import logo1 from "../assets/jobsList/logo1.webp";
+import logo2 from "../assets/jobsList/logo2.webp";
+import logo3 from "../assets/jobsList/logo3.webp";
+import logo4 from "../assets/jobsList/logo4.webp";
+import logo5 from "../assets/jobsList/logo5.webp";
+import logo6 from "../assets/jobsList/logo6.webp";
 import imageList1 from "../assets/jobsList/cover-image-employer-2.webp";
 import imageList2 from "../assets/jobsList/cover-image-employer-3.webp";
 import imageList3 from "../assets/jobsList/cover-image-employer-4.webp";
@@ -475,7 +476,11 @@ const JobsListing = () => {
                   <div className="flex-1">
                     <div className="flex justify-between">
                       <h3 className="text-2xl font-bold text-gray-900">
-                        {job.title}
+                        <Link
+                          to="/jobs/details"
+                          className="hover:underline hover:text-green-600 transition">
+                          {job.title}
+                        </Link>
                       </h3>
                       <div className="flex items-center gap-3 ml-4">
                         {job.featured && (

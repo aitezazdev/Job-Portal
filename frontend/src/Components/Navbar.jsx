@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FaChevronDown, FaUser } from "react-icons/fa";
-import logo from "../assets/logo.webp";
+import logo from "../assets/jobsList/logo.webp";
 
 const menuItems = [
   {
